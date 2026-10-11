@@ -113,5 +113,4 @@ async def handle_message(sender: str, text: str, reply: Callable[[str], Awaitabl
         await reply(f"Bu görev homelab içinde değişiklik yapabilir:\n\n{task}\n\nUygulamak için /confirm {token} yazın. İptal: /cancel")
         return
     task = text.removeprefix("/ask ").strip() if lowered.startswith("/ask ") else text
-    await reply("Salt-okunur kontrol başlatıldı; biraz sürebilir...")
     await reply(await asyncio.to_thread(run_codex, task, "read-only"))
