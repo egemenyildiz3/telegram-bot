@@ -10,12 +10,12 @@ services:
     environment:
       CODEX_BIN: /usr/local/bin/codex
       CODEX_HOME: /home/codex/.codex
-      CODEX_WORKSPACE: /workspace
+      CODEX_WORKSPACE: /home/egemen
       BOT_DB: /app/data/bot.sqlite3
     user: "${UID:-1000}:${GID:-1000}"
     working_dir: /app
     volumes:
-      - /home/egemen/homelab:/workspace
+      - /home/egemen:/home/egemen
       - /home/egemen/.codex:/home/codex/.codex
       - ./data:/app/data
     read_only: true

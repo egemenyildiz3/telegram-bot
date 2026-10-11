@@ -15,4 +15,4 @@ docker compose restart
 docker compose down
 ```
 
-Container root olarak çalışmaz. Homelab `/workspace` olarak bağlanır; Codex ayarları salt-okunur bağlanır.
+Container root olarak çalışmaz. Host home dizini `/home/egemen` olarak bağlanır; Codex home dizini yazabilir. Bu erişim `.ssh`, config ve diğer kişisel dosyaları da kapsar.
