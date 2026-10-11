@@ -3,5 +3,6 @@
 data/*.sqlite3
 data/*.sqlite3-*
 logs/*
+*.pid
 __pycache__/
 app/__pycache__/

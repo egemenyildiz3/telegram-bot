@@ -1,0 +1,27 @@
+services:
+  telegram-codex:
+    build:
+      context: .
+    container_name: telegram-codex
+    restart: unless-stopped
+    init: true
+    env_file:
+      - .env
+    environment:
+      CODEX_BIN: /usr/local/bin/codex
+      CODEX_HOME: /home/codex/.codex
+      CODEX_WORKSPACE: /workspace
+      BOT_DB: /app/data/bot.sqlite3
+    user: "${UID:-1000}:${GID:-1000}"
+    working_dir: /app
+    volumes:
+      - /home/egemen/homelab:/workspace
+      - /home/egemen/.codex:/home/codex/.codex:ro
+      - ./data:/app/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
