@@ -16,11 +16,12 @@ services:
     working_dir: /app
     volumes:
       - /home/egemen/homelab:/workspace
-      - /home/egemen/.codex:/home/codex/.codex:ro
+      - /home/egemen/.codex:/home/codex/.codex
       - ./data:/app/data
     read_only: true
     tmpfs:
       - /tmp
+      - /home/codex
     cap_drop:
       - ALL
     security_opt:
