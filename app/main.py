@@ -41,6 +41,8 @@ def init_db() -> None:
 def run_codex(task: str, sandbox: str) -> str:
     prompt = f"""Sen, Linux homelab yöneticisine yardım eden Codex aracısısın.
 Çalışma alanın: {ROOT}
+Docker path eşlemesi: host `/home/egemen/homelab` = container `/workspace`.
+Kullanıcı host yolunu (`/home/egemen/homelab/...`) söylerse bunu container içindeki `/workspace/...` olarak yorumla.
 Kullanıcı isteği: {task}
 
 Kurallar:
