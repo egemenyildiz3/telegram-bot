@@ -48,15 +48,16 @@ Kullanıcı isteği: {task}
 Kurallar:
 - Sadece çalışma alanı içindeki dosya ve servislerle ilgilen.
 - Secret, token, parola ve özel anahtarların içeriğini cevaba koyma.
-- {sandbox} sandbox politikasına uy.
+- Docker container'ı dış izolasyon olarak kabul et; kendi iç Linux sandbox'ını başlatmaya çalışma.
 - İşlem yaptıysan ne yaptığını ve sonucu kısa, Türkçe özetle.
 - İstek belirsizse değişiklik yapmak yerine soru sor.
 """
     with tempfile.NamedTemporaryFile(prefix="codex-answer-", suffix=".txt", delete=False) as answer:
         answer_path = Path(answer.name)
     try:
-        command = [CODEX_BIN, "exec", "--ephemeral", "--skip-git-repo-check", "--sandbox", sandbox,
-                   "--cd", str(ROOT), "--output-last-message", str(answer_path), "-"]
+        command = [CODEX_BIN, "exec", "--ephemeral", "--skip-git-repo-check",
+                   "--dangerously-bypass-approvals-and-sandbox", "--cd", str(ROOT),
+                   "--output-last-message", str(answer_path), "-"]
         completed = subprocess.run(command, input=prompt, text=True, capture_output=True,
                                    cwd=ROOT, timeout=int(os.getenv("CODEX_TIMEOUT_SECONDS", "300")), check=False)
         result = answer_path.read_text(encoding="utf-8", errors="replace").strip()
